@@ -1,0 +1,52 @@
+{% extends "blog/base.html" %}
+
+{%block title %} Blog {% endblock %}
+
+
+{% block css %} 
+
+#img{
+  width:200px;
+  height:250px;
+  }
+
+{% endblock %}
+
+
+{% block body %}
+    
+    {% comment %} <a ><img src= "{% static 'blog/contact.jpg' %}" alt="Flowers in Chania">Viw image</a>            {% endcomment %}
+  
+    <div class="container my-3">
+      <div class="row mb-2">
+      {% for i in blog %}
+      <div class="col-md-6">
+        
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">{{i.title}}</strong>
+            <h3 class="mb-0">{{i.head0}}</h3>
+            <div class="mb-1 text-muted">{{i.publish_date}}</div>
+            <p class="card-text mb-auto">{{i.contant_head0|slice:"0:100"}} ....</p>
+            
+            <a href="myblogposts/{{i.post_id}}" class="stretched-link">Continue reading</a>
+          </div>
+          
+          <div class="col-auto d-none d-lg-block">
+            <img src='/media/{{i.thumbnail}}' class="bd-placeholder-img" width="200" height="250">
+           
+             </img> 
+             
+             {% comment %} <img id="img" src='/media/{{i.thumbnail}}' class="card-img-top" alt="...">  {% endcomment %}
+        </div>
+      </div>
+      </div>
+      {% if forloop.counter|divisibleby:2 %}
+    </div> <div class="row mb-2">
+    {% endif %}
+    
+  {% endfor %}
+ </div>
+  
+
+  {% endblock %}
